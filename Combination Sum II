@@ -1,5 +1,5 @@
 Time complexity : O(2^n*k)
-Spa
+Space complexity : O(x*k)
 
 class Solution {
     public void helper(int idx,int x,int[] arr, List<List<Integer>> res, List<Integer> ls){
