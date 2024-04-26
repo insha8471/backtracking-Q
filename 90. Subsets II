@@ -26,3 +26,27 @@ class Solution {
         return result;
     }
 }
+
+*******************************************************************************************************************
+Optimal Approach 
+Time complexity : O(2^n * n)
+Space complexity : O(2^n * k)
+
+class Solution {
+    public void helper(int idx, int[] nums, List<List<Integer>> res, List<Integer> ls){
+        res.add(new ArrayList<>(ls));
+        for(int i=idx;i<nums.length;i++){
+            if(i != idx && nums[i] == nums[i-1]) continue;
+
+            ls.add(nums[i]);
+            helper(i+1,nums, res, ls);
+            ls.remove(ls.size()-1);
+        }
+    }
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
+        helper(0,nums,result, new ArrayList<>());
+        return result;
+    }
+}
