@@ -1,0 +1,26 @@
+Time complexity : O(2^n*k)
+Spa
+
+class Solution {
+    public void helper(int idx,int x,int[] arr, List<List<Integer>> res, List<Integer> ls){
+        if(x == 0){
+            res.add(new ArrayList<>(ls));
+            return;
+        }
+        for(int i=idx;i<arr.length;i++){
+            if(i > idx && arr[i] == arr[i-1]) continue;
+            if(arr[i] > x) break;
+
+            ls.add(arr[i]);
+            helper(i+1,x-arr[i], arr, res, ls);
+            //backtrack
+            ls.remove(ls.size()-1);            
+        }
+    }
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList<>();
+        helper(0, target, candidates, result, new ArrayList<>());
+        return result;
+    }
+}
