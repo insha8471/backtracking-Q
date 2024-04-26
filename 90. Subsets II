@@ -1,3 +1,7 @@
+Approach : Using set
+Time complexity : O(2^n*log(k))
+Space complexity : O(x*k)
+
 class Solution {
     Set<List<Integer>> st = new HashSet<>();
     public void helper(int idx, int[] nums, List<List<Integer>> res, List<Integer> ls){
