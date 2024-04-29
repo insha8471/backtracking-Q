@@ -1,3 +1,5 @@
+Approach : Backtraking
+
 class Solution {
     public void helper(int idx , int[] nums, List<List<Integer>> res , List<Integer> temp){
         if(idx >= nums.length){
