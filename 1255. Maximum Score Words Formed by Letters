@@ -1,0 +1,44 @@
+Approach : Backtracking
+Time complexity : O(2^n * L)
+Space complexity : O(n)
+
+class Solution {
+    public void helper(int idx, String[] words,int[] freq, int[] sc, int[] res,int cScore){
+        res[0]  = Math.max(res[0], cScore);
+        if(idx >= words.length){
+            return;
+        }
+
+        int[] tempFreq = Arrays.copyOf(freq,freq.length);
+
+        int i = 0;
+        int tempScore = 0;
+        while(i < words[idx].length()){
+            char ch = words[idx].charAt(i);
+            tempFreq[ch-'a']--;
+            tempScore += sc[ch-'a'];
+
+            if(tempFreq[ch-'a'] < 0){
+                break;
+            }
+            i++;
+        }
+
+        //take
+        if(i == words[idx].length()){
+            helper(idx+1,words,tempFreq,sc,res,cScore+tempScore);
+        }
+        //not take
+        helper(idx+1, words, freq,sc, res,cScore);
+
+    }
+    public int maxScoreWords(String[] words, char[] letters, int[] score) {
+        int[] freq = new int[26];
+        for(char ch : letters){
+            freq[ch-'a']++;
+        }
+        int[] res = new int[1];
+        helper(0,words,freq, score, res, 0);
+        return res[0];
+    }
+}
