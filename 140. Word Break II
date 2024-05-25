@@ -1,0 +1,31 @@
+class Solution {
+    public void helper(int idx, String s, Set<String> st,String currSentence, List<String> res){
+        if(idx >= s.length()){
+            res.add(currSentence.trim());
+            return;
+        }
+
+        for(int i=idx;i<s.length();i++){
+            String currS = s.substring(idx,i+1);
+            if(st.contains(currS)){
+                String temp = currSentence;
+                if(!currSentence.isEmpty()){
+                    currSentence += " ";
+                }
+                currSentence += currS;
+
+                helper(i+1,s,st,currSentence, res);
+
+                currSentence = temp;
+            }
+        }
+    }
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        List<String> res = new ArrayList<>();
+
+        Set<String> st = new HashSet<>(wordDict);
+        String currSentence = "";
+        helper(0,s,st,currSentence, res);
+        return res;
+    }
+}
