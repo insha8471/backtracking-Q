@@ -1,0 +1,49 @@
+Time complexity : O(9^(n^2))
+Space complexity : O(1)
+class Solution {
+    public boolean isValid(char[][] board, char ch, int r, int c){
+        for(int i=0;i<9;i++){
+            //row
+
+            if(board[r][i] == ch){
+                return false;
+            }
+
+            //col
+            if(board[i][c] == ch){
+                return false;
+            }
+
+            int row = (3*(r/3) + i/3);
+            int col = (3*(c/3) + i%3);
+            if(board[row][col] == ch){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean solve(char[][] board){
+        for(int r=0;r<board.length;r++){
+            for(int c=0;c<board[0].length;c++){
+                if(board[r][c] == '.'){
+                    for(char ch='1';ch<='9';ch++){
+                        if(isValid(board,ch, r,c)){
+                            board[r][c] = ch;
+
+                            if(solve(board) == true){
+                                return true;
+                            }else{
+                                board[r][c] = '.';
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public void solveSudoku(char[][] board) {
+        solve(board);
+    }
+}
